@@ -6,11 +6,13 @@ Created on Sun Apr 12 18:59:29 2020
 """
 # =============================================================================
 #          Classification of patients based on Various Parameters
+#          Dataset obtained from Kaggle
 # =============================================================================
 
 import pandas as pd
 import matplotlib.pyplot as plt
 
+# Read data
 data = pd.read_csv("diabetes.csv")
 
 # Information about the patients
@@ -52,27 +54,22 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 
-
 # Train test split
 X_train, X_test, y_train, y_test = train_test_split(X, y, random_state = 40, test_size = 0.20)
 
 # Scale the attributes
-
 sc_X = StandardScaler()
 X_train = sc_X.fit_transform(X_train)
 X_test = sc_X.transform(X_test)
 
 # Regression Model training
-
 reg_model = LogisticRegression(multi_class = "multinomial", solver = "lbfgs", C = 100)
 reg_model.fit(X_train, y_train)
 
 # Predict the values
-
 y_pred = reg_model.predict(X_test).flatten()
 
 # Calculate goodness of model
-
 from sklearn import metrics
 print("Accuracy Score: ", metrics.accuracy_score(y_test, y_pred))
 
