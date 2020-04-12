@@ -10,7 +10,6 @@ Created on Sun Apr 12 18:59:29 2020
 
 import pandas as pd
 import matplotlib.pyplot as plt
-import numpy as np
 
 data = pd.read_csv("diabetes.csv")
 
@@ -18,10 +17,10 @@ data = pd.read_csv("diabetes.csv")
 X = data.iloc[:, :-1].values
 
 # Outcomes
-y = data.iloc[:, -1:].values
+y = data.iloc[:, -1:].values.flatten()
 
 # =============================================================================
-#                     *** Data Preprocessing ***
+#                     *** Data Exploration ***
 # =============================================================================
 
 # To check the dataframe
@@ -53,6 +52,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 
+
 # Train test split
 X_train, X_test, y_train, y_test = train_test_split(X, y, random_state = 40, test_size = 0.20)
 
@@ -64,27 +64,17 @@ X_test = sc_X.transform(X_test)
 
 # Regression Model training
 
-reg_model = LogisticRegression(multi_class = "multinomial", solver = "lbfgs", C = 10)
+reg_model = LogisticRegression(multi_class = "multinomial", solver = "lbfgs", C = 100)
 reg_model.fit(X_train, y_train)
 
 # Predict the values
 
-y_pred = reg_model.predict(X_test)
+y_pred = reg_model.predict(X_test).flatten()
 
 # Calculate goodness of model
 
 from sklearn import metrics
+print("Accuracy Score: ", metrics.accuracy_score(y_test, y_pred))
 
-# =============================================================================
-# print(metrics.accuracy_score(y_test, y_pred.flatten()))
-# 
-# print(metrics.confusion_matrix(y_test, y_pred.flatten()))
-# 
-# 
-# 
-# =============================================================================
-
-
-
-
-
+#null accuracy
+print("Null Model Score: ", max(y_test.mean(), 1 - y_test.mean()))
