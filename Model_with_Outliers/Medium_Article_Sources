@@ -1,0 +1,11 @@
+Sources:
+
+
+1. Jason Brownlee Blog Post
+https://machinelearningmastery.com/robust-regression-for-machine-learning-in-python/
+
+2. Wikipedia for Theil Sen Method
+https://en.wikipedia.org/wiki/Theil%E2%80%93Sen_estimator#:~:text=In%20non%2Dparametric%20statistics%2C%20the,lines%20through%20pairs%20of%20points.
+
+3. Huber Loss Website
+https://cvxr.rbind.io/cvxr_examples/cvxr_huber-regression/
